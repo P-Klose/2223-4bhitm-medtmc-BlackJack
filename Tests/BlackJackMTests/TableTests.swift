@@ -45,5 +45,9 @@ final class TableTests: XCTestCase {
             XCTAssertEqual(4, count)
         }
     }
+    func testThatShuffleFunctionIsCalled() {
+        var table = Table(numberOfDecks: 1, shuffle: { stackOfCards in [Card]() })
+        XCTAssertNil(table.nextCard())
+    }
     
 }

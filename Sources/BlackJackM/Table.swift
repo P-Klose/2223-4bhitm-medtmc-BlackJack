@@ -14,10 +14,11 @@ struct Table {
         stackOfCards.isEmpty ? nil : stackOfCards.removeFirst()
     }
     
-    init(numberOfDecks: Int = 6) {
+    init(numberOfDecks: Int = 6, shuffle: ([Card]) -> [Card] = {stackOfCards in stackOfCards.shuffled()}) {
         for _ in 1...numberOfDecks {
             generateOneDeck()
         }
+        stackOfCards = shuffle(stackOfCards)
     }
     
     mutating fileprivate func generateOneDeck() {
