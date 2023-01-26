@@ -1,0 +1,58 @@
+@startuml
+
+left to right direction
+
+class Round
+
+class Table {
+    nextCard()
+    getNextCard()
+}
+
+class Dealer {
+}
+
+class Player {
+    name: String
+    --
+    takeOne(card: Card)
+    showHand(): [Card]
+}
+
+class Card {
+    rank: Rank
+}
+
+enum Rank {
+    two
+    three
+    four
+    five
+    six
+    seven
+    eight
+    nine
+    ten
+    jack
+    queen
+    king
+    ace
+}
+
+interface CardHolder {
+    showHand()
+}
+
+Round "*"--"1" Table
+Table "1"--"1" Dealer
+
+Table "1"--"*" Player
+Table "1"--"*" Card
+
+Player --|> CardHolder
+Dealer --|> CardHolder
+
+Card "*"--"1" Rank
+
+
+@enduml
