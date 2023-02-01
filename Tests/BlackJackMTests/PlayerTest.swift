@@ -9,35 +9,69 @@ import XCTest
 @testable import BlackJackM
 
 final class PlayerTests: XCTestCase {
+    private var player: Player!
+
+    override func setUp() {
+        player = Player(name: "John Doe")
+    }
     
     func testThatPlayerHasAName() {
-        let player = Player(name: "John Doe")
         XCTAssertEqual(player.name, "John Doe")
     }
     
     func testThatPlayerShowesAce_givenOneAce() {
         let someCard = Card(rank: Card.Rank.ace)
-        let player = Player(name: "Sepp")
         
         player.takeOne(card: someCard)
         let hand = player.showHand()
         XCTAssertTrue(hand.contains(someCard))
     }
-    func testThatPlayerShowesAce_givenOneJack() {
+    
+    func testThatPlayerShowesJack_givenOneJack() {
         let someCard = Card(rank: Card.Rank.jack)
-        let player = Player(name: "Sepp")
         
         player.takeOne(card: someCard)
         let hand = player.showHand()
         XCTAssertTrue(hand.contains(someCard))
     }
+    
     func testThatPlayerOnlyHaseOneCard_givenOneCard() {
         let someCard = Card(rank: Card.Rank.jack)
-        let player = Player(name: "Sepp")
         
         player.takeOne(card: someCard)
         let hand = player.showHand()
         XCTAssertEqual(hand.count, 1)
+    }
+    
+    func testThatPlayerHasTwoCards_givenTwoCards() {
+        let firstCard = Card(rank: .king)
+        let secondCard = Card(rank: .eight)
+        
+        player.takeOne(card: firstCard)
+        player.takeOne(card: secondCard)
+        
+        let hand = player.showHand()
+        XCTAssertEqual(hand.count, 2)
+    }
+    
+    func testThatValueOfHandIs0_givenEmptyHand() {
+        XCTAssertEqual(player.valueOfHand, 0)
+    }
+    
+    func testThatValueOfHandIs2_givenOneTwo() {
+        player.takeOne(card: Card(rank: .two))
+        XCTAssertEqual(player.valueOfHand, 2)
+    }
+    
+    func testThatValueOfHandIs5_givenCardsTwoAndThree() {
+        player.takeOne(card: Card(rank: .two))
+        XCTAssertEqual(player.valueOfHand, 2)
+    }
+    
+    func testThatValueOfHandIs12_givenTwoAce() {
+        player.takeOne(card: Card(rank: .two))
+        player.takeOne(card: Card(rank: .three))
+        XCTAssertEqual(player.valueOfHand, 5)
     }
     
 }
