@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Card {
+struct Card: Equatable {
     var rank: Rank
     var value: Int {
         rank == Rank.ace ? 11:min(rank.rawValue, 10)

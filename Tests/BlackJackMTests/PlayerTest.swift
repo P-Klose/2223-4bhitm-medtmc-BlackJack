@@ -11,12 +11,33 @@ import XCTest
 final class PlayerTests: XCTestCase {
     
     func testThatPlayerHasAName() {
-        var player = Player(name: "John Doe")
+        let player = Player(name: "John Doe")
         XCTAssertEqual(player.name, "John Doe")
     }
     
-    func testThatPlayerCanReceiveACard() {
+    func testThatPlayerShowesAce_givenOneAce() {
+        let someCard = Card(rank: Card.Rank.ace)
+        let player = Player(name: "Sepp")
         
+        player.takeOne(card: someCard)
+        let hand = player.showHand()
+        XCTAssertTrue(hand.contains(someCard))
+    }
+    func testThatPlayerShowesAce_givenOneJack() {
+        let someCard = Card(rank: Card.Rank.jack)
+        let player = Player(name: "Sepp")
+        
+        player.takeOne(card: someCard)
+        let hand = player.showHand()
+        XCTAssertTrue(hand.contains(someCard))
+    }
+    func testThatPlayerOnlyHaseOneCard_givenOneCard() {
+        let someCard = Card(rank: Card.Rank.jack)
+        let player = Player(name: "Sepp")
+        
+        player.takeOne(card: someCard)
+        let hand = player.showHand()
+        XCTAssertEqual(hand.count, 1)
     }
     
 }
