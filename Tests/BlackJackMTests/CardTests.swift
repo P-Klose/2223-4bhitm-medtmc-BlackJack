@@ -19,4 +19,9 @@ final class CardTests: XCTestCase {
             currentIndex += 1
         }
     }
+    func testThatCardConformsToEquatable() {
+        let cardOne = Card(rank: Card.Rank.ace)
+        let cardTwo = Card(rank: Card.Rank.ace)
+        XCTAssertTrue(cardOne == cardTwo)
+    }
 }
