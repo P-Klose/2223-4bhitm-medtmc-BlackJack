@@ -13,7 +13,9 @@ class Dealer {
 }
 
 class Player {
-    name: String
+    + name: String
+    - cards: [Card]
+    + valueOfHand: Int
     --
     takeOne(card: Card)
     showHand(): [Card]
