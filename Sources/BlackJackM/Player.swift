@@ -15,11 +15,11 @@ struct Player {
     }
     
     fileprivate func calculateValueOfHand() -> Int {
-        var value = cards.reduce(0, {$0 + $1.value})
-        if value > 21 && cards.contains(Card(rank: .ace)){
-            value -= 10
+        cards.sorted {
+            $0.value < $1.value
+        }.reduce(0) {
+            $0 + ($1.rank == .ace && $0 > 10 ? 1 : $1.value)
         }
-        return value
     }
     
     init(name: String) {

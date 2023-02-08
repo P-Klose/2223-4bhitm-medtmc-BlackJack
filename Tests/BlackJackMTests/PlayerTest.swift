@@ -76,7 +76,22 @@ final class PlayerTests: XCTestCase {
     }
     
     func testThatValueOfHandIs13_givenThreeAces() {
-        <#statements#>
+        player.takeOne(card: Card(rank: .ace))
+        player.takeOne(card: Card(rank: .ace))
+        player.takeOne(card: Card(rank: .ace))
+        XCTAssertEqual(player.valueOfHand, 13)
+    }
+    func testThatValueOfHandIs13_givenCardsTwoAndAceAndKing() {
+        player.takeOne(card: Card(rank: .two))
+        player.takeOne(card: Card(rank: .ace))
+        player.takeOne(card: Card(rank: .king))
+        XCTAssertEqual(player.valueOfHand, 13)
+    }
+    func testThatValueOfHandIs12_givenCardsTwoAcesAndOneTen() {
+        player.takeOne(card: Card(rank: .ace))
+        player.takeOne(card: Card(rank: .ace))
+        player.takeOne(card: Card(rank: .ten))
+        XCTAssertEqual(player.valueOfHand, 12)
     }
     
     
